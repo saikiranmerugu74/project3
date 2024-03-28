@@ -25,6 +25,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh label: '', script: "terraform init"
+                sh label: '', script: "terraform apply"
             }
         }
         stage ('Test'){
@@ -38,9 +39,9 @@ pipeline {
                     sshagent(['deployserver']) {
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} 'git clone https://github.com/saikiranmerugu74/project3.git -b main'"
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} 'cp -r project3/* /home/ubuntu'"
-                        //sh "ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} 'ls'"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} 'ls'"
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} 'pwd'"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} 'docker-compose up -d --build'"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} ''"
                         }
 
                 }
