@@ -4,6 +4,7 @@ pipeline {
         SUBSCRIPTION_ID = credentials('subscription_id')
         TENANT_ID = credentials('tenant_id')
         CLIENT_SECRET = credentials('client_secret')
+        TEST_VM = credentials('deployserver')
 
     }
     agent any
@@ -21,11 +22,11 @@ pipeline {
             steps {
                 script {
                     sshagent(['deployserver']) {
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} 'git clone https://github.com/saikiranmerugu74/project3.git -b main'"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} 'cp -r project3/* /home/ubuntu'"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} 'terraform init'"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} 'terraform plan'"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} 'terraform apply -auto-approve'"
+                        sh "ssh -o StrictHostKeyChecking=no azureuser@${TEST_VM} 'git clone https://github.com/saikiranmerugu74/project3.git -b main'"
+                        sh "ssh -o StrictHostKeyChecking=no azureuser@${TEST_VM} 'cp -r project3/* /home/ubuntu'"
+                        sh "ssh -o StrictHostKeyChecking=no azureuser@${TEST_VM} 'terraform init'"
+                        sh "ssh -o StrictHostKeyChecking=no azureuser@${TEST_VM} 'terraform plan'"
+                        sh "ssh -o StrictHostKeyChecking=no azureuser@${TEST_VM} 'terraform apply -auto-approve'"
                         }
 
                 }
