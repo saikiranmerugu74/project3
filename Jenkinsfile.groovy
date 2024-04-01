@@ -16,6 +16,18 @@ pipeline {
             }
         }
 
+
+        stage('Azure Login') {
+    steps {
+        script {
+            // Execute 'az login' command
+            sh "az login --service-principal -u ${CLIENT_ID} -p ${CLIENT_SECRET} --tenant ${TENANT_ID}"
+            sh "az account set -s ${SUBSCRIPTION_ID}"
+        }
+    }
+}
+
+'''
         stage('Azure Login') {
             steps {
                 script {
@@ -31,7 +43,7 @@ pipeline {
                 }
             }
         }
-        
+ '''       
     
         stage('Deploy') {
             steps {
