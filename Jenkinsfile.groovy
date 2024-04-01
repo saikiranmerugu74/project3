@@ -22,7 +22,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh label: '', script: "terraform init"
-                sh label: '', script: "terrafrom plan"
+                //sh label: '', script: "terrafrom plan"
                 sh label: '', script: "terraform apply -auto-approve"
             }
         }       
