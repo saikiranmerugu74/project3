@@ -4,9 +4,6 @@ pipeline {
         SUBSCRIPTION_ID="488a119a-b2e2-49eb-abfa-98c93480fc34"
         TENANT_ID="ed236744-d848-41e9-a7cd-e801c29208fc"
         CLIENT_SECRET="eFV8Q~OIaTxwFYd8yqtkHZt9cp5Yk8rGoAEQfc2-"
-        PATH = " /home/ubuntu/.local/lib/python3.10/site-packages:$PATH"
-        
-
     }
     agent any
     stages {
