@@ -4,8 +4,7 @@ pipeline {
         SUBSCRIPTION_ID = credentials('subscription_id')
         TENANT_ID = credentials('tenant_id')
         CLIENT_SECRET = credentials('client_secret')
-        TEST_VM = credentials('deployserver')
-
+        TEST_VM = '20.55.67.133'
     }
     agent any
     stages {
