@@ -15,6 +15,22 @@ pipeline {
                 
             }
         }
+
+        stage('Azure Login') {
+            steps {
+                script {
+                    // Execute 'az login' command
+                    sh 'az login --service-principal -u "$client_id" -p "$client_secret" -t "$tenant_id"'
+                    sh 'az account set -s "$subscription_id"'
+                    
+                    // Run the command
+                    //def loginOutput = sh(script: azureLogin, returnStdout: true).trim()
+
+                    // Print the output for debugging
+                    //println loginOutput
+                }
+            }
+        }
         
     
         stage('Deploy') {
