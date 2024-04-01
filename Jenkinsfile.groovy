@@ -25,15 +25,6 @@ pipeline {
                 sh label: '', script: "terrafrom plan"
                 sh label: '', script: "terraform apply -auto-approve"
             }
-        }
-'''
-        stage ('Clean Up'){
-            steps{
-                sh returnStatus: true, script: 'terraform destroy'
-                //sh returnStatus: true, script: ''
-
-            }
-        }
-'''             
+        }       
     }
 }
