@@ -1,8 +1,11 @@
 pipeline {
     environment {
-        PATH = " /home/ubuntu/.local/lib/python3.10/site-packages:$PATH"
-        AZURE_VM = ''
-        AZURE_VM_SSH_KEY_CREDENTIALS = credentials('deployserver')
+        CLIENT_ID="9c0da9e1-33dc-4044-bc8a-854f91be2c72"
+        SUBSCRIPTION_ID="488a119a-b2e2-49eb-abfa-98c93480fc34"
+        TENANT_ID="ed236744-d848-41e9-a7cd-e801c29208fc"
+        CLIENT_SECRET="eFV8Q~OIaTxwFYd8yqtkHZt9cp5Yk8rGoAEQfc2-"
+        
+
     }
     agent any
     stages {
@@ -14,6 +17,16 @@ pipeline {
                 
             }
         }
+        
+    
+        stage('Deploy') {
+            steps {
+                sh label: '', script: "terraform init"
+                sh label: '', script: "terrafrom plan"
+                sh label: '', script: "terraform apply -auto-approve"
+            }
+        }
+'''
         stage ('Clean Up'){
             steps{
                 sh returnStatus: true, script: 'terraform destroy'
@@ -21,31 +34,6 @@ pipeline {
 
             }
         }
-    
-        stage('Deploy') {
-            steps {
-                sh label: '', script: "terraform init"
-                sh label: '', script: "terraform apply"
-            }
-        }
-        stage ('Test'){
-            steps {
-                sh "python3 -m pytest testapp.py"
-            }
-        }
-        stage('Deploy on Azure_VM') {  
-            steps {
-                script {
-                    sshagent(['deployserver']) {
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} 'git clone https://github.com/saikiranmerugu74/project3.git -b main'"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} 'cp -r project3/* /home/ubuntu'"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} 'ls'"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} 'pwd'"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} ''"
-                        }
-
-                }
-            }
-        }
+'''             
     }
 }
