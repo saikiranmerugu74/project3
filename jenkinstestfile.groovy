@@ -21,13 +21,13 @@ pipeline {
             steps {
                 script {
                     sshagent(['deployserver']) {
-                        sh "ssh -o StrictHostKeyChecking=no azureuser@${TEST_VM} 'git clone https://github.com/saikiranmerugu74/project3.git -b main'"
-                        sh "ssh -o StrictHostKeyChecking=no azureuser@${TEST_VM} 'cp -r project3/* /home/azureuser'"
-                        sh "ssh -o StrictHostKeyChecking=no azureuser@${TEST_VM} 'sudo rm -r project3'"
-                        sh "ssh -o StrictHostKeyChecking=no azureuser@${TEST_VM} 'terraform init'"
-                        sh "ssh -o StrictHostKeyChecking=no azureuser@${TEST_VM} 'terraform plan'"
-                        sh "ssh -o StrictHostKeyChecking=no azureuser@${TEST_VM} 'terraform apply -auto-approve'"
-                        //sh "ssh -o StrictHostKeyChecking=no azureuser@${TEST_VM} 'terraform destroy -auto-approve'"
+                        //sh "ssh -o StrictHostKeyChecking=no azureuser@${TEST_VM} 'git clone https://github.com/saikiranmerugu74/project3.git -b main'"
+                        //sh "ssh -o StrictHostKeyChecking=no azureuser@${TEST_VM} 'cp -r project3/* /home/azureuser'"
+                        //sh "ssh -o StrictHostKeyChecking=no azureuser@${TEST_VM} 'sudo rm -r project3'"
+                        //sh "ssh -o StrictHostKeyChecking=no azureuser@${TEST_VM} 'terraform init'"
+                        //sh "ssh -o StrictHostKeyChecking=no azureuser@${TEST_VM} 'terraform plan'"
+                        //sh "ssh -o StrictHostKeyChecking=no azureuser@${TEST_VM} 'terraform apply -auto-approve'"
+                        sh "ssh -o StrictHostKeyChecking=no azureuser@${TEST_VM} 'terraform destroy -auto-approve'"
                         }
 
                 }
